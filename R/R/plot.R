@@ -41,7 +41,8 @@ df_for_plotting <- function(m, fcst) {
 #'
 #' @export
 plot.prophet <- function(x, fcst, uncertainty = TRUE, plot_cap = TRUE,
-                         xlabel = 'ds', ylabel = 'y', ...) {
+                         xlabel = 'ds', ylabel = 'y', shape = "circle",
+                         ...) {
   df <- df_for_plotting(x, fcst)
   gg <- ggplot2::ggplot(df, ggplot2::aes(x = ds, y = y)) +
     ggplot2::labs(x = xlabel, y = ylabel)
@@ -61,7 +62,7 @@ plot.prophet <- function(x, fcst, uncertainty = TRUE, plot_cap = TRUE,
                            na.rm = TRUE)
   }
   gg <- gg +
-    ggplot2::geom_point(na.rm=TRUE) +
+    ggplot2::geom_point(shape = shape, na.rm=TRUE) +
     ggplot2::geom_line(ggplot2::aes(y = yhat), color = "#0072B2",
                        na.rm = TRUE) +
     ggplot2::theme(aspect.ratio = 3 / 5)
