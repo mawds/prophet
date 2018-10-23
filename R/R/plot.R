@@ -54,6 +54,10 @@ plot.prophet <- function(x, fcst, uncertainty = TRUE, plot_cap = TRUE,
     gg <- gg + ggplot2::geom_line(
       ggplot2::aes(y = floor), linetype = 'dashed', na.rm = TRUE)
   }
+  
+  gg <- gg +
+    ggplot2::geom_point(shape = shape, na.rm=TRUE) 
+  
   if (uncertainty && exists('yhat_lower', where = df)) {
     gg <- gg +
       ggplot2::geom_ribbon(ggplot2::aes(ymin = yhat_lower, ymax = yhat_upper),
@@ -62,7 +66,6 @@ plot.prophet <- function(x, fcst, uncertainty = TRUE, plot_cap = TRUE,
                            na.rm = TRUE)
   }
   gg <- gg +
-    ggplot2::geom_point(shape = shape, na.rm=TRUE) +
     ggplot2::geom_line(ggplot2::aes(y = yhat), color = "#0072B2",
                        na.rm = TRUE) +
     ggplot2::theme(aspect.ratio = 3 / 5)
